@@ -7,5 +7,5 @@ public class Constants {
 
 	public static final String MOD_ID = "quickerconnectbutton";
 	public static final String MOD_NAME = "Quicker Connect Button";
-	public static final Logger LOG = LoggerFactory.getLogger(MOD_NAME);
+	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_NAME);
 }

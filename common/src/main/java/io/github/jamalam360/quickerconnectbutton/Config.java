@@ -14,14 +14,14 @@ public class Config {
 		try {
 			properties.load(Files.newInputStream(configPath));
 		} catch (Exception e1) {
-			Constants.LOG.warn("Encountered an exception while loading config, writing a default");
+			Constants.LOGGER.warn("Encountered an exception while loading config, writing a default");
 			properties.put("ip", "");
 			properties.put("port", Integer.toString(25565));
 
 			try {
 				properties.store(Files.newOutputStream(configPath), null);
 			} catch (Exception e2) {
-				Constants.LOG.warn("Failed to write default config, bailing out and giving up.");
+				Constants.LOGGER.warn("Failed to write default config, bailing out and giving up.");
 				return null;
 			}
 		}

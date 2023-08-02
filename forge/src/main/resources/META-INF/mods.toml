@@ -1,27 +1,27 @@
 modLoader = "javafml"
 loaderVersion = "[47,)"
 license = "MIT"
-issueTrackerURL="${mod_homepage}/issues"
+issueTrackerURL="https://github.com/JamCoreModding/quicker-connect-button/issues"
 
 [[mods]]
-modId = "${mod_id}"
+modId = "quickerconnectbutton"
 version = "${file.jarVersion}"
-displayName = "${mod_name}"
-displayURL="${mod_homepage}"
+displayName = "Quicker Connect Button"
+displayURL="https://github.com/JamCoreModding/quicker-connect-button"
 logoFile = "icon.png"
 authors = "Jamalam"
 description = '''
-${mod_description}
+Adds a connect button to the main menu.
 '''
 
-[[dependencies.${mod_id}]] #optional
+[[dependencies.quickerconnectbutton]] #optional
 modId = "forge"
 mandatory = true
 versionRange = "[47,)"
 ordering = "NONE"
 side = "BOTH"
 
-[[dependencies.${mod_id}]]
+[[dependencies.quickerconnectbutton]]
 modId = "minecraft"
 mandatory = true
 versionRange = "[1.20,1.21)"

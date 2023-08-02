@@ -1,5 +1,6 @@
 package io.github.jamalam360.quickerconnectbutton;
 
+import com.mojang.datafixers.kinds.Const;
 import io.github.jamalam360.quickerconnectbutton.platform.Services;
 import org.jetbrains.annotations.Nullable;
 
@@ -9,5 +10,6 @@ public class QuickerConnectButton {
 
 	public static void init() {
 		config = Config.load(Services.PLATFORM.getConfigDir());
+		Constants.LOGGER.info("Loaded Quicker Connect Button on " + Services.PLATFORM.getPlatformName());
 	}
 }
