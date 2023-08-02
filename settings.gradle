@@ -3,29 +3,29 @@ pluginManagement {
         gradlePluginPortal()
 
         maven {
-            name = 'Forge'
-            url = 'https://maven.minecraftforge.net/'
+            name = "Forge"
+            url = "https://maven.minecraftforge.net/"
         }
 
         maven {
-            name = 'Fabric'
-            url = 'https://maven.fabricmc.net/'
+            name = "Fabric"
+            url = "https://maven.fabricmc.net/"
         }
 
         maven {
-            name = 'Sponge Snapshots'
-            url = 'https://repo.spongepowered.org/repository/maven-public/'
+            name = "Sponge Snapshots"
+            url = "https://repo.spongepowered.org/repository/maven-public/"
         }
 
         maven {
-            name = 'Architectury'
+            name = "Architectury"
             url = "https://maven.architectury.dev/"
         }
     }
 }
 
 plugins {
-    id 'org.gradle.toolchains.foojay-resolver-convention' version '0.5.0'
+    id "org.gradle.toolchains.foojay-resolver-convention" version "0.5.0"
 }
 
 dependencyResolutionManagement {
@@ -36,7 +36,7 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = 'quicker-connect-button'
+rootProject.name = "quicker-connect-button"
 include("common")
 include("fabric")
 include("forge")

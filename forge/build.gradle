@@ -1,54 +1,54 @@
 plugins {
-    id 'idea'
-    id 'maven-publish'
-    id 'net.minecraftforge.gradle'
-    id 'org.spongepowered.mixin'
-    id 'me.shedaniel.unified-publishing'
+    id "idea"
+    id "maven-publish"
+    id "net.minecraftforge.gradle"
+    id "org.spongepowered.mixin"
+    id "me.shedaniel.unified-publishing"
 }
 
 base {
-    archivesName = '${mod_name}-forge-${minecraft_version}'
+    archivesName = "${mod_name}-forge-${minecraft_version}"
 }
 
 mixin {
-    add(sourceSets.main, '${mod_id}.refmap.json')
+    add(sourceSets.main, "${mod_id}.refmap.json")
 
-    config('${mod_id}.mixins.json')
-    config('${mod_id}.forge.mixins.json')
+    config("${project.mod_id}.mixins.json")
+    config("${mod_id}.forge.mixins.json")
 }
 
 minecraft {
-    mappings channel: 'official', version: minecraft_version
+    mappings channel: "official", version: minecraft_version
 
-    if (file('src/main/resources/META-INF/accesstransformer.cfg').exists()) {
-        accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
+    if (file("src/main/resources/META-INF/accesstransformer.cfg").exists()) {
+        accessTransformer = file("src/main/resources/META-INF/accesstransformer.cfg")
     }
 
     runs {
         client {
-            workingDirectory project.file('run')
-            ideaModule '${rootProject.name}.${project.name}.main'
-            taskName 'Client'
-            property 'mixin.env.remapRefMap', 'true'
-            property 'mixin.env.refMapRemappingFile', '${projectDir}/build/createSrgToMcp/output.srg'
+            workingDirectory project.file("run")
+            ideaModule "${rootProject.name}.${project.name}.main"
+            taskName "Client"
+            property "mixin.env.remapRefMap", "true"
+            property "mixin.env.refMapRemappingFile", "${projectDir}/build/createSrgToMcp/output.srg"
             mods {
                 modClientRun {
                     source sourceSets.main
-                    source project(':common').sourceSets.main
+                    source project(":common").sourceSets.main
                 }
             }
         }
 
         server {
-            workingDirectory project.file('run')
-            ideaModule '${rootProject.name}.${project.name}.main'
-            taskName 'Server'
-            property 'mixin.env.remapRefMap', 'true'
-            property 'mixin.env.refMapRemappingFile', '${projectDir}/build/createSrgToMcp/output.srg'
+            workingDirectory project.file("run")
+            ideaModule "${rootProject.name}.${project.name}.main"
+            taskName "Server"
+            property "mixin.env.remapRefMap", "true"
+            property "mixin.env.refMapRemappingFile", "${projectDir}/build/createSrgToMcp/output.srg"
             mods {
                 modServerRun {
                     source sourceSets.main
-                    source project(':common').sourceSets.main
+                    source project(":common").sourceSets.main
                 }
             }
         }
@@ -57,52 +57,52 @@ minecraft {
 
 dependencies {
     minecraft libs.forge
-    compileOnly project(':common')
+    compileOnly project(":common")
     annotationProcessor variantOf(libs.mixin) {
-        classifier('processor')
+        classifier("processor")
     }
 }
 
-if (!System.getenv('CURSEFORGE_API_TOKEN')?.isEmpty() && !System.getenv('MODRINTH_TOKEN')?.isEmpty()) {
+if (System.getenv("CURSEFORGE_API_TOKEN") != null && System.getenv("MODRINTH_TOKEN") != null) {
     unifiedPublishing {
         project {
-            displayName = 'V${version} (Forge ${project.minecraft_version})'
-            changelog = rootProject.file('CHANGELOG.md').text
-            releaseType = version.toString().contains('beta') ? 'beta' : 'release'
+            displayName = "V${version} (Forge ${project.minecraft_version})"
+            changelog = rootProject.file("CHANGELOG.md").text
+            releaseType = version.toString().contains("beta") ? "beta" : "release"
             gameVersions = [project.minecraft_version]
-            gameLoaders = ['forge']
+            gameLoaders = ["forge"]
 
             mainPublication tasks.jar
 
-            curseforge {
-                token = System.getenv('CURSEFORGE_API_KEY')
-                id = '000000'
-            }
+//            curseforge {
+//                token = System.getenv("CURSEFORGE_API_KEY")
+//                id = "000000"
+//            }
 
             modrinth {
-                token = System.getenv('MODRINTH_TOKEN')
-                id = 'P7dR8mSH'
+                token = System.getenv("MODRINTH_TOKEN")
+                id = "P7dR8mSH"
 
-                gameLoaders.addAll('neoforge')
+                gameLoaders.addAll("neoforge")
             }
         }
     }
 }
 
 tasks.withType(JavaCompile).configureEach {
-    source(project(':common').sourceSets.main.allSource)
+    source(project(":common").sourceSets.main.allSource)
 }
 
 tasks.withType(Javadoc).configureEach {
-    source(project(':common').sourceSets.main.allJava)
+    source(project(":common").sourceSets.main.allJava)
 }
 
-tasks.named('sourcesJar', Jar) {
-    from(project(':common').sourceSets.main.allSource)
+tasks.named("sourcesJar", Jar) {
+    from(project(":common").sourceSets.main.allSource)
 }
 
 processResources {
-    from project(':common').sourceSets.main.resources
+    from project(":common").sourceSets.main.resources
 }
 
-jar.finalizedBy('reobfJar')
+jar.finalizedBy("reobfJar")

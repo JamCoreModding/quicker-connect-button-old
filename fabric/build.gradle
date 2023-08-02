@@ -1,9 +1,9 @@
 plugins {
-    id 'java'
-    id 'idea'
-    id 'maven-publish'
-    id 'fabric-loom'
-    id 'me.shedaniel.unified-publishing'
+    id "java"
+    id "idea"
+    id "maven-publish"
+    id "fabric-loom"
+    id "me.shedaniel.unified-publishing"
 }
 
 base {
@@ -44,32 +44,32 @@ loom {
     }
 }
 
-if (!System.getenv('CURSEFORGE_API_TOKEN')?.isEmpty() && !System.getenv('MODRINTH_TOKEN')?.isEmpty()) {
+if (System.getenv("CURSEFORGE_API_TOKEN") != null && System.getenv("MODRINTH_TOKEN") != null) {
     unifiedPublishing {
         project {
-            displayName = 'V${version} (Fabric ${project.minecraft_version})'
-            changelog = rootProject.file('CHANGELOG.md').text
-            releaseType = version.toString().contains('beta') ? 'beta' : 'release'
+            displayName = "V${version} (Fabric ${project.minecraft_version})"
+            changelog = rootProject.file("CHANGELOG.md").text
+            releaseType = version.toString().contains("beta") ? "beta" : "release"
             gameVersions = [project.minecraft_version]
-            gameLoaders = ['fabric', 'quilt']
+            gameLoaders = ["fabric", "quilt"]
 
             mainPublication tasks.remapJar
 
             relations {
                 depends {
-                    curseforge = 'fabric-api'
-                    modrinth = 'fabric-api'
+                    curseforge = "fabric-api"
+                    modrinth = "fabric-api"
                 }
             }
-
-            curseforge {
-                token = System.getenv('CURSEFORGE_API_TOKEN')
-                id = '000000'
-            }
+//
+//            curseforge {
+//                token = System.getenv("CURSEFORGE_API_TOKEN")
+//                id = "000000"
+//            }
 
             modrinth {
-                token = System.getenv('MODRINTH_TOKEN')
-                id = 'P7dR8mSH'
+                token = System.getenv("MODRINTH_TOKEN")
+                id = "P7dR8mSH"
             }
         }
     }
