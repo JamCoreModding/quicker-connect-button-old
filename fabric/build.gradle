@@ -3,6 +3,7 @@ plugins {
     id 'idea'
     id 'maven-publish'
     id 'fabric-loom'
+    id 'me.shedaniel.unified-publishing'
 }
 
 base {
@@ -39,6 +40,35 @@ loom {
             setConfigName("Fabric Server")
             ideConfigGenerated(true)
             runDir("run")
+        }
+    }
+}
+
+unifiedPublishing {
+    project {
+        displayName = 'V${version} (Fabric ${project.minecraft_version})'
+        changelog = rootProject.file('CHANGELOG.md').text
+        releaseType = version.toString().contains('beta') ? 'beta' : 'release'
+        gameVersions = [project.minecraft_version]
+        gameLoaders = ['fabric', 'quilt']
+
+        mainPublication tasks.remapJar
+
+        relations {
+            depends {
+                curseforge = 'fabric-api'
+                modrinth = 'fabric-api'
+            }
+        }
+
+        curseforge {
+            token = System.getenv('CURSEFORGE_API_TOKEN')
+            id = '000000'
+        }
+
+        modrinth {
+            token = System.getenv('MODRINTH_TOKEN')
+            id = 'P7dR8mSH'
         }
     }
 }
