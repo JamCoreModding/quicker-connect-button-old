@@ -44,31 +44,33 @@ loom {
     }
 }
 
-unifiedPublishing {
-    project {
-        displayName = 'V${version} (Fabric ${project.minecraft_version})'
-        changelog = rootProject.file('CHANGELOG.md').text
-        releaseType = version.toString().contains('beta') ? 'beta' : 'release'
-        gameVersions = [project.minecraft_version]
-        gameLoaders = ['fabric', 'quilt']
+if (!System.getenv('CURSEFORGE_API_TOKEN')?.isEmpty() && !System.getenv('MODRINTH_TOKEN')?.isEmpty()) {
+    unifiedPublishing {
+        project {
+            displayName = 'V${version} (Fabric ${project.minecraft_version})'
+            changelog = rootProject.file('CHANGELOG.md').text
+            releaseType = version.toString().contains('beta') ? 'beta' : 'release'
+            gameVersions = [project.minecraft_version]
+            gameLoaders = ['fabric', 'quilt']
 
-        mainPublication tasks.remapJar
+            mainPublication tasks.remapJar
 
-        relations {
-            depends {
-                curseforge = 'fabric-api'
-                modrinth = 'fabric-api'
+            relations {
+                depends {
+                    curseforge = 'fabric-api'
+                    modrinth = 'fabric-api'
+                }
             }
-        }
 
-        curseforge {
-            token = System.getenv('CURSEFORGE_API_TOKEN')
-            id = '000000'
-        }
+            curseforge {
+                token = System.getenv('CURSEFORGE_API_TOKEN')
+                id = '000000'
+            }
 
-        modrinth {
-            token = System.getenv('MODRINTH_TOKEN')
-            id = 'P7dR8mSH'
+            modrinth {
+                token = System.getenv('MODRINTH_TOKEN')
+                id = 'P7dR8mSH'
+            }
         }
     }
 }

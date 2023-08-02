@@ -63,26 +63,28 @@ dependencies {
     }
 }
 
-unifiedPublishing {
-    project {
-        displayName = 'V${version} (Forge ${project.minecraft_version})'
-        changelog = rootProject.file('CHANGELOG.md').text
-        releaseType = version.toString().contains('beta') ? 'beta' : 'release'
-        gameVersions = [project.minecraft_version]
-        gameLoaders = ['forge']
+if (!System.getenv('CURSEFORGE_API_TOKEN')?.isEmpty() && !System.getenv('MODRINTH_TOKEN')?.isEmpty()) {
+    unifiedPublishing {
+        project {
+            displayName = 'V${version} (Forge ${project.minecraft_version})'
+            changelog = rootProject.file('CHANGELOG.md').text
+            releaseType = version.toString().contains('beta') ? 'beta' : 'release'
+            gameVersions = [project.minecraft_version]
+            gameLoaders = ['forge']
 
-        mainPublication tasks.jar
+            mainPublication tasks.jar
 
-        curseforge {
-            token = System.getenv('CURSEFORGE_API_KEY')
-            id = '000000'
-        }
+            curseforge {
+                token = System.getenv('CURSEFORGE_API_KEY')
+                id = '000000'
+            }
 
-        modrinth {
-            token = System.getenv('MODRINTH_TOKEN')
-            id = 'P7dR8mSH'
+            modrinth {
+                token = System.getenv('MODRINTH_TOKEN')
+                id = 'P7dR8mSH'
 
-            gameLoaders.addAll('neoforge')
+                gameLoaders.addAll('neoforge')
+            }
         }
     }
 }
