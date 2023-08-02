@@ -63,26 +63,25 @@ dependencies {
     }
 }
 
-if (System.getenv("CURSEFORGE_API_TOKEN") != null && System.getenv("MODRINTH_TOKEN") != null) {
+if (System.getenv("CURSEFORGE_API_KEY") != null && System.getenv("MODRINTH_API_KEY") != null) {
     unifiedPublishing {
         project {
-            displayName = "V${version} (Forge ${project.minecraft_version})"
+            displayName = "V${project.version} (Forge ${project.minecraft_version})"
             changelog = rootProject.file("CHANGELOG.md").text
-            releaseType = version.toString().contains("beta") ? "beta" : "release"
+            releaseType = project.version.contains("beta") ? "beta" : "release"
             gameVersions = [project.minecraft_version]
             gameLoaders = ["forge"]
 
             mainPublication tasks.jar
 
-//            curseforge {
-//                token = System.getenv("CURSEFORGE_API_KEY")
-//                id = "000000"
-//            }
+            curseforge {
+                token = System.getenv("CURSEFORGE_API_KEY")
+                id = "898092"
+            }
 
             modrinth {
-                token = System.getenv("MODRINTH_TOKEN")
-                id = "P7dR8mSH"
-
+                token = System.getenv("MODRINTH_API_KEY")
+                id = "1SruaFxM"
                 gameLoaders.addAll("neoforge")
             }
         }
