@@ -1,36 +1,33 @@
 {
     "schemaVersion": 1,
-    "id": "mod_id",
+    "id": "${mod_id}",
     "version": "${version}",
     "name": "${mod_name}",
-    "description": "This is an example description! Tell everyone what your mod is about!",
+    "description": "${mod_description}",
     "authors": [
-        "${mod_author}"
+        "Jamalam"
     ],
     "contact": {
-        "homepage": "https://fabricmc.net/",
-        "sources": "https://github.com/FabricMC/fabric-example-mod"
+        "homepage": "${mod_homepage}",
+        "sources": "${mod_homepage}",
+        "sources": "${mod_homepage}/issues"
     },
-    "license": "CC0-1.0",
-    "icon": "assets/modid/icon.png",
-    "environment": "*",
+    "license": "MIT",
+    "icon": "assets/${mod_id}/icon.png",
+    "environment": "client",
     "entrypoints": {
         "main": [
-            "com.example.examplemod.ExampleMod"
+            "io.github.jamalam360.quickerconnectbutton.QuickerConnectButtonFabric"
         ]
     },
     "mixins": [
-        "examplemod.mixins.json",
-        "examplemod.fabric.mixins.json"
+        "quickerconnectbutton.mixins.json",
+        "quickerconnectbutton.fabric.mixins.json"
     ],
     "depends": {
         "fabricloader": ">=0.14",
         "fabric": "*",
-        "minecraft": "1.20",
+        "minecraft": ">=1.20",
         "java": ">=17"
-    },
-    "suggests": {
-        "another-mod": "*"
     }
 }
-  
