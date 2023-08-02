@@ -7,7 +7,7 @@
 
 Adds a connect button to the main menu for quickly connecting to servers.
 
-![Screenshot](https://github.com/JamCoreModding/quicker-connect-button/blob/1.20.1/.github/screenshot.png?raw=true)
+![Screenshot](https://github.com/JamCoreModding/quicker-connect-button/blob/1.20.1/screenshot.png?raw=true)
 
 ## Configuration
 
