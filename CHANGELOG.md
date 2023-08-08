@@ -1,1 +1,1 @@
-Initial release. Here's to hoping we don't need many more.
+- Add two new config keys, `replaceMultiplayerButton` and `text`. (#1)

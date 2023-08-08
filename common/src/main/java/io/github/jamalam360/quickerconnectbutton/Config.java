@@ -17,6 +17,8 @@ public class Config {
 			Constants.LOGGER.warn("Encountered an exception while loading config, writing a default");
 			properties.put("ip", "");
 			properties.put("port", Integer.toString(25565));
+			properties.put("replaceMultiplayerButton", Boolean.toString(false));
+			properties.put("text", "Connect");
 
 			try {
 				properties.store(Files.newOutputStream(configPath), null);
@@ -26,12 +28,14 @@ public class Config {
 			}
 		}
 
-		int port = properties.contains("port") ? Integer.parseInt((String) properties.get("port")) : 25565;
+		String ip = (String) properties.get("ip");
+		int port = properties.containsKey("port") ? Integer.parseInt((String) properties.get("port")) : 25565;
+		boolean replaceMultiplayerButton = properties.containsKey("replaceMultiplayerButton") && Boolean.parseBoolean((String) properties.get("replaceMultiplayerButton"));
+		String text = properties.containsKey("text") ? (String) properties.get("text") : "Connect";
 
-		return new Data((String) properties.get("ip"), port);
+		return new Data(ip, port, replaceMultiplayerButton, text);
 	}
 
-	public record Data(@Nullable String ip, int port) {
-
+	public record Data(@Nullable String ip, int port, boolean replaceMultiplayerButton, String text) {
 	}
 }
